@@ -1,11 +1,23 @@
 import socket
 
+
+message = ''
 #Azure addr.
-HOST = '127.0.0.1'
+HOST = '168.62.192.26'
 PORT = 5050
+print HOST, PORT
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
-s.sendall('Hello, world')
-data = s.recv(1024)
+try:
+    s.connect((HOST, PORT))
+except socket.error, msg:
+    print 'Bind failed. Error code: ' + str(msg[0] + 'Message: ' + msg[1])
+    sys.exit()
+
+while True:
+    message = raw_input("What do you want to send the server?\n")
+    s.sendall(message)
+    data = s.recv(1024)
+    print 'Received', repr(data)
+
 s.close()
-print 'Received', repr(data)
