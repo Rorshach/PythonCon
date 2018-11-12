@@ -16,7 +16,11 @@ except socket.error, msg:
 
 while True:
     message = raw_input("What do you want to send the server?\n")
-    s.sendall(message)
+    byteMsg = bytearray(message)
+    for b in byteMsg:
+        print b
+
+    s.send(byteMsg)
     data = s.recv(1024)
     print 'Received', repr(data)
 
