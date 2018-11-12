@@ -15,7 +15,9 @@ except socket.error, msg:
     sys.exit()
 
 while True:
-    message = raw_input("What do you want to send the server?\n")
+    message = raw_input("What do you want to send the server? Enter: &*exit to quit.\n")
+    if message == '&*exit':
+        break
     byteMsg = bytearray(message)
     for b in byteMsg:
         print b
